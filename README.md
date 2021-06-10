@@ -5,7 +5,7 @@
 * Genera un arreglo de objetos de 50 posiciones de manera aleatoria
 * Cada posición almacena un objeto de tipo Persona (identificación y edad)
 * El arreglo se divide en tres y los almacena en forma de pila: menores de edad, mayores de edad y adultos mayores
-* Utiliza el método LIFO (lasti-in, first-out)
+* Utiliza el método LIFO (last-in, first-out)
 * El programa permite extraer el último elemento de cada pila (lo muestra antes de eliminarlo)
 * Se puede vaciar cualquier pila cuando se desee
 * El programa muestra cuántos elementos quedan en la pila
