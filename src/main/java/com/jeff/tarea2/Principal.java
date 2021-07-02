@@ -145,6 +145,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btnVaciar3.setText("Vaciar pila");
+        btnVaciar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVaciar3ActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -293,27 +298,27 @@ public class Principal extends javax.swing.JFrame {
 
         
        //menores
-        String[] menores = op.menores();
+        Persona[] menores = op.menores();
         
         int cont = menores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(menores.length)); i--){
-            dtm.setValueAt(menores[cont], i, 1);
+            dtm.setValueAt("ID: " + menores[cont].getId() + " | Edad: " + menores[cont].getEdad(), i, 1);
             cont--;
         }
         
          //mayores
-        String[] mayores = op.mayores();
+        Persona[] mayores = op.mayores();
         int cont2 = mayores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(mayores.length)); i--){
-            dtm.setValueAt(mayores[cont2], i, 2);
+            dtm.setValueAt("ID: " + mayores[cont2].getId() + " | Edad: " + mayores[cont2].getEdad(), i, 2);
             cont2--;
         }
         
          //mayores
-        String[] ancianos = op.ancianos();
+        Persona[] ancianos = op.ancianos();
         int cont3 = ancianos.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(ancianos.length)); i--){
-            dtm.setValueAt(ancianos[cont3], i, 3);
+            dtm.setValueAt("ID: "+ ancianos[cont3].getId() + " | Edad: " + ancianos[cont3].getEdad(), i, 3);
             cont3--;
         }
         
@@ -362,9 +367,10 @@ public class Principal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, String.format("La cantidad de adultos mayores es: %d",
                     cant),"Cantidad de adultos mayores", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnCant3ActionPerformed
-
+    
+    //extraer personas menores 
     private void btnPop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPop1ActionPerformed
-        String [] menores = op.popMenores();
+        Persona [] menores = op.popMenores();
         
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
@@ -377,34 +383,38 @@ public class Principal extends javax.swing.JFrame {
             dtm.addRow(new String[]{row[i]});
             
         }
-        
-        int cont = menores.length-1;
-        for(int i = p.length-1; i > ((p.length-1)-(menores.length)); i--){
-            dtm.setValueAt(menores[cont], i, 1);
-            cont--;
+        //vuelve a mostrar la lista de menores actualizada
+        if (menores != null) {
+            int cont = menores.length - 1;
+            for (int i = p.length - 1; i > ((p.length - 1) - (menores.length)); i--) {
+                dtm.setValueAt("ID: " + menores[cont].getId() + " | Edad: " + menores[cont].getEdad(), i, 1);
+                cont--;
+            }
         }
+
         
-         //mayores
-        String[] mayores = op.getMayor();
+         //vuelve a actualizar la lista de mayores
+        Persona[] mayores = op.getMayor();
         int cont2 = mayores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(mayores.length)); i--){
-            dtm.setValueAt(mayores[cont2], i, 2);
+            dtm.setValueAt("ID: " + mayores[cont2].getId() + " | Edad: " + mayores[cont2].getEdad(), i, 2);
             cont2--;
         }
         
-         //mayores
-        String[] ancianos = op.getAnciano();
+         //actualiza la lista de adultos mayores
+        Persona[] ancianos = op.getAnciano();
         int cont3 = ancianos.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(ancianos.length)); i--){
-            dtm.setValueAt(ancianos[cont3], i, 3);
+            dtm.setValueAt("ID: " + ancianos[cont3].getId() + " | Edad: " + ancianos[cont3].getEdad(), i, 3);
             cont3--;
         }
         
     }//GEN-LAST:event_btnPop1ActionPerformed
-
+    
+    //extrae las personas mayores
     private void btnPop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPop2ActionPerformed
         
-        String [] mayores = op.popMayores();
+        Persona [] mayores = op.popMayores();
         
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
@@ -418,32 +428,37 @@ public class Principal extends javax.swing.JFrame {
             
         }
         
-        String [] menores = op.getMenor();
+        
+        //actualiza la lista de mayores
+        if (mayores != null) {
+            int cont2 = mayores.length - 1;
+            for (int i = p.length - 1; i > ((p.length - 1) - (mayores.length)); i--) {
+                dtm.setValueAt("ID: " + mayores[cont2].getId() + " | Edad: " + mayores[cont2].getEdad(), i, 2);
+                cont2--;
+            }
+        }
+  
+        //actualiza la lista de menores
+        Persona [] menores = op.getMenor();
         int cont = menores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(menores.length)); i--){
-            dtm.setValueAt(menores[cont], i, 1);
+            dtm.setValueAt("ID: " + menores[cont].getId() + " | Edad: " + menores[cont].getEdad(), i, 1);
             cont--;
         }
         
-         //mayores
-        int cont2 = mayores.length-1;
-        for(int i = p.length-1; i > ((p.length-1)-(mayores.length)); i--){
-            dtm.setValueAt(mayores[cont2], i, 2);
-            cont2--;
-        }
-        
-         //mayores
-        String[] ancianos = op.getAnciano();
+         //Actualiza la lista de adultos mayores
+        Persona[] ancianos = op.getAnciano();
         int cont3 = ancianos.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(ancianos.length)); i--){
-            dtm.setValueAt(ancianos[cont3], i, 3);
+            dtm.setValueAt("ID: " + ancianos[cont3].getId() + " | Edad: " + ancianos[cont3].getEdad(), i, 3);
             cont3--;
         }
     }//GEN-LAST:event_btnPop2ActionPerformed
-
+    
+    //extrae un elemento en adultos mayores
     private void btnPop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPop3ActionPerformed
         
-        String [] ancianos = op.popAncianos();
+        Persona [] ancianos = op.popAncianos();
         
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
@@ -457,29 +472,36 @@ public class Principal extends javax.swing.JFrame {
             
         }
         
-        String [] menores = op.getMenor();
+        if (ancianos != null) {
+            //Actualiza la lista de ancianos
+            int cont3 = ancianos.length - 1;
+            for (int i = p.length - 1; i > ((p.length - 1) - (ancianos.length)); i--) {
+                dtm.setValueAt("ID: " + ancianos[cont3].getId() + " | Edad: " + ancianos[cont3].getId(), i, 3);
+                cont3--;
+            }
+        }
+        
+        
+        //actualiza la lista de menores
+        Persona [] menores = op.getMenor();
         int cont = menores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(menores.length)); i--){
-            dtm.setValueAt(menores[cont], i, 1);
+            dtm.setValueAt("ID: " + menores[cont].getId() + " | Edad: " + menores[cont].getEdad(), i, 1);
             cont--;
         }
         
-         //mayores
-        String[] mayores = op.getMayor();
+         //actualiza la lista de mayores
+        Persona[] mayores = op.getMayor();
         int cont2 = mayores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(mayores.length)); i--){
-            dtm.setValueAt(mayores[cont2], i, 2);
+            dtm.setValueAt("ID: " + mayores[cont2].getId() + " | Edad: " + mayores[cont2].getEdad(), i, 2);
             cont2--;
         }
         
-         //ancianos
-        int cont3 = ancianos.length-1;
-        for(int i = p.length-1; i > ((p.length-1)-(ancianos.length)); i--){
-            dtm.setValueAt(ancianos[cont3], i, 3);
-            cont3--;
-        }
-    }//GEN-LAST:event_btnPop3ActionPerformed
 
+    }//GEN-LAST:event_btnPop3ActionPerformed
+    
+    //vacía la pila
     private void btnVaciar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciar1ActionPerformed
         op.vaciarMenores();
         
@@ -501,18 +523,18 @@ public class Principal extends javax.swing.JFrame {
         }
         
          //mayores
-        String[] mayores = op.getMayor();
+        Persona[] mayores = op.getMayor();
         int cont2 = mayores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(mayores.length)); i--){
-            dtm.setValueAt(mayores[cont2], i, 2);
+            dtm.setValueAt("ID: " + mayores[cont2].getId() + " | Edad: " + mayores[cont2].getEdad(), i, 2);
             cont2--;
         }
         
          //ancianos
-        String [] ancianos = op.getAnciano();
+        Persona [] ancianos = op.getAnciano();
         int cont3 = ancianos.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(ancianos.length)); i--){
-            dtm.setValueAt(ancianos[cont3], i, 3);
+            dtm.setValueAt("ID: " + ancianos[cont3].getId() + " | Edad: " + ancianos[cont3].getEdad(), i, 3);
             cont3--;
         }
     }//GEN-LAST:event_btnVaciar1ActionPerformed
@@ -537,21 +559,58 @@ public class Principal extends javax.swing.JFrame {
             dtm.setValueAt("", i, 2);
         }
         
-        String [] menores = op.getMenor();
+        Persona [] menores = op.getMenor();
         int cont = menores.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(menores.length)); i--){
-            dtm.setValueAt(menores[cont], i, 1);
+            dtm.setValueAt("ID: " + menores[cont].getId() + " | Edad: " + menores[cont].getEdad(), i, 1);
             cont--;
         }
         
          //ancianos
-        String [] ancianos = op.getAnciano();
+        Persona [] ancianos = op.getAnciano();
         int cont3 = ancianos.length-1;
         for(int i = p.length-1; i > ((p.length-1)-(ancianos.length)); i--){
-            dtm.setValueAt(ancianos[cont3], i, 3);
+            dtm.setValueAt("ID: " + ancianos[cont3].getId() + " | Edad: " + ancianos[cont3].getEdad(), i, 3);
             cont3--;
         }
     }//GEN-LAST:event_btnVaciar2ActionPerformed
+
+    private void btnVaciar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciar3ActionPerformed
+        
+        op.vaciarAncianos();
+        
+        DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
+        dtm.setRowCount(0);
+        
+        String[] row = new String[p.length];
+        
+        for(int i=0; i< p.length; i++){
+            row[i] = "ID: " + p[i].getId() + " | Edad: " + p[i].getEdad();
+            
+            dtm.addRow(new String[]{row[i]});
+            
+        }
+        
+        //se vacía la pila de ancianos
+        for(int i = 0; i < p.length; i++){
+            dtm.setValueAt("", i, 3);
+        }
+        
+        Persona [] menores = op.getMenor();
+        int cont = menores.length-1;
+        for(int i = p.length-1; i > ((p.length-1)-(menores.length)); i--){
+            dtm.setValueAt("ID: " + menores[cont].getId() + " | Edad: " + menores[cont].getEdad(), i, 1);
+            cont--;
+        }
+        
+         //ancianos
+        Persona [] mayores = op.getMayor();
+        int cont2 = mayores.length-1;
+        for(int i = p.length-1; i > ((p.length-1)-(mayores.length)); i--){
+            dtm.setValueAt("ID: " + mayores[cont2].getId() + " | Edad: " + mayores[cont2].getEdad(), i, 2);
+            cont2--;
+        }
+    }//GEN-LAST:event_btnVaciar3ActionPerformed
     
     /**
      * @param args the command line arguments
